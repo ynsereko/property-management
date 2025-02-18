@@ -69,7 +69,7 @@ public class ProperController {
     public ResponseEntity<Void> deleteProperty(@PathVariable Long propertyId) {
         propertyService.deleteProperty(propertyId);
         ResponseEntity<Void> responseEntity;
-        responseEntity = new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+        responseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT);
         return responseEntity;
     }
 
