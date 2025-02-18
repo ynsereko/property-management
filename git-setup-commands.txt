@@ -5,7 +5,7 @@ Frist Time Git & Github Setup
 2. git add .
 3. git commit -m "any message"
 4. git remote add origin https://github.com/ynsereko/property-management.git
-5. git remote set-url origin https://ynsereko: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@github.com/ynsereko/property-management.git
+5. git remote set-url origin https://ynsereko:mytoken@github.com/ynsereko/property-management.git
 6. git push --set-upstream origin master
 
 Next Time Onwards
