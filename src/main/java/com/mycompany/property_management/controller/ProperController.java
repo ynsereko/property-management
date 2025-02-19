@@ -17,8 +17,13 @@ public class ProperController {
     @Value("${spring.application.name:}")
     private String appName;
 
+
+    private final PropertyService propertyService;
+
     @Autowired
-    private PropertyService propertyService;
+    public ProperController(PropertyService propertyService) {
+        this.propertyService = propertyService;
+    }
 
     @GetMapping("/hello")
     public String sayHello() {

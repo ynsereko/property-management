@@ -16,11 +16,17 @@ import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
-    @Autowired
-    private UserRepository userRepository;
+
+    private final UserRepository userRepository;
+
+
+    private final UserConverter userConverter;
 
     @Autowired
-    private UserConverter userConverter;
+    public UserServiceImpl(UserRepository userRepository, UserConverter userConverter) {
+        this.userRepository = userRepository;
+        this.userConverter = userConverter;
+    }
 
     @Override
     public UserDTO register(UserDTO userDTO) {

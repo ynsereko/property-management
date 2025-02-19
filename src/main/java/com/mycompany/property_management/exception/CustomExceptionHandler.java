@@ -6,12 +6,15 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @ControllerAdvice
 public class CustomExceptionHandler {
+    Logger logger = Logger.getLogger(getClass().getName());
+
     @ExceptionHandler(BusinessException.class)
     public ResponseEntity<List<ErrorModel>> handleBusinessException(BusinessException bex) {
-        System.out.println("Business Exception is thrown");
+        logger.info("Business Exception is thrown");
         return new ResponseEntity<>(bex.getErrors(), HttpStatus.BAD_REQUEST);
     }
 }

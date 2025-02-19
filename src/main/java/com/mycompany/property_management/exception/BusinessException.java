@@ -8,10 +8,10 @@ import java.util.List;
 
 @Getter
 @Setter
-@NoArgsConstructor
+@NoArgsConstructor(force = true)
 public class BusinessException extends RuntimeException {
 
-    private  List<ErrorModel> errors;
+    private final transient  List<ErrorModel> errors;
 
     public BusinessException(List<ErrorModel> errors) {
         this.errors = errors;
