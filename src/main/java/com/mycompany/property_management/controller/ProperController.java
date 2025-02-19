@@ -17,16 +17,22 @@ public class ProperController {
     @Value("${spring.application.name:}")
     private String appName;
 
- @Autowired
-private PropertyService propertyService;
+
+    private final PropertyService propertyService;
+
+    @Autowired
+    public ProperController(PropertyService propertyService) {
+        this.propertyService = propertyService;
+    }
+
     @GetMapping("/hello")
-    public  String sayHello() {
+    public String sayHello() {
         return "Hello";
     }
 
     @PostMapping("/properties")
     public ResponseEntity<PropertyDTO> saveProperty(@RequestBody PropertyDTO propertyDTO) {
-       propertyDTO = propertyService.saveProperty(propertyDTO);
+        propertyDTO = propertyService.saveProperty(propertyDTO);
         ResponseEntity<PropertyDTO> responseEntity;
         responseEntity = new ResponseEntity<>(propertyDTO, HttpStatus.CREATED);
         return responseEntity;
@@ -35,22 +41,22 @@ private PropertyService propertyService;
     @GetMapping("/properties")
     public ResponseEntity<List<PropertyDTO>> getAllProperties() {
         List<PropertyDTO> propertyDTOList = propertyService.getAllProperties();
-        ResponseEntity<List<PropertyDTO>>  responseEntity;
-        responseEntity = new ResponseEntity<>(propertyDTOList,HttpStatus.OK);
+        ResponseEntity<List<PropertyDTO>> responseEntity;
+        responseEntity = new ResponseEntity<>(propertyDTOList, HttpStatus.OK);
         return responseEntity;
     }
 
     @PutMapping("/properties/{propertyId}")
     public ResponseEntity<PropertyDTO> updateProperty(@RequestBody PropertyDTO propertyDTO, @PathVariable Long propertyId) {
-      propertyDTO =  propertyService.updateProperty(propertyDTO,propertyId);
-      ResponseEntity<PropertyDTO> responseEntity;
+        propertyDTO = propertyService.updateProperty(propertyDTO, propertyId);
+        ResponseEntity<PropertyDTO> responseEntity;
         responseEntity = new ResponseEntity<>(propertyDTO, HttpStatus.OK);
         return responseEntity;
     }
 
     @PatchMapping("/properties/update-description/{propertyId}")
     public ResponseEntity<PropertyDTO> updatePropertyDescription(@RequestBody PropertyDTO propertyDTO, @PathVariable Long propertyId) {
-        propertyDTO =  propertyService.updatePropertyDescription(propertyDTO,propertyId);
+        propertyDTO = propertyService.updatePropertyDescription(propertyDTO, propertyId);
         ResponseEntity<PropertyDTO> responseEntity;
         responseEntity = new ResponseEntity<>(propertyDTO, HttpStatus.OK);
         return responseEntity;
@@ -58,9 +64,9 @@ private PropertyService propertyService;
 
     @PatchMapping("/properties/update-price/{propertyId}")
     public ResponseEntity<PropertyDTO> updatePropertyPrice(@RequestBody PropertyDTO propertyDTO, @PathVariable Long propertyId) {
-        propertyDTO =  propertyService.updatePropertyPrice(propertyDTO,propertyId);
+        propertyDTO = propertyService.updatePropertyPrice(propertyDTO, propertyId);
         ResponseEntity<PropertyDTO> responseEntity;
-        responseEntity = new ResponseEntity<>(propertyDTO,HttpStatus.OK);
+        responseEntity = new ResponseEntity<>(propertyDTO, HttpStatus.OK);
         return responseEntity;
     }
 
@@ -68,7 +74,7 @@ private PropertyService propertyService;
     public ResponseEntity<Void> deleteProperty(@PathVariable Long propertyId) {
         propertyService.deleteProperty(propertyId);
         ResponseEntity<Void> responseEntity;
-        responseEntity = new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+        responseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT);
         return responseEntity;
     }
 

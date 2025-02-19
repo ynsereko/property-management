@@ -15,10 +15,16 @@ import java.util.Optional;
 
 @Service
 public class PropertyServiceImpl implements PropertyService {
+
+    private final PropertyRepository propertyRepository;
+
+    private final PropertyConverter propertyConverter;
+
     @Autowired
-    private PropertyRepository propertyRepository;
-    @Autowired
-    private PropertyConverter propertyConverter;
+    public PropertyServiceImpl(PropertyRepository propertyRepository, PropertyConverter propertyConverter) {
+        this.propertyRepository = propertyRepository;
+        this.propertyConverter = propertyConverter;
+    }
 
     /**
      * @param PropertyDTO
@@ -56,8 +62,6 @@ public class PropertyServiceImpl implements PropertyService {
             PropertyEntity pe = optionalPropertyEntity.get();
             pe.setTitle(propertyDTO.getTitle());
             pe.setAddress(propertyDTO.getAddress());
-            pe.setOwnerEmail(propertyDTO.getOwnerEmail());
-            pe.setOwnerName(propertyDTO.getOwnerName());
             pe.setPrice(propertyDTO.getPrice());
             pe.setDescription(propertyDTO.getDescription());
 
